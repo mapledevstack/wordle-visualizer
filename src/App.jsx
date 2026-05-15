@@ -1,32 +1,20 @@
 import { useState, useEffect, useReducer } from "react";
-import { WORD_LENGTH, MAX_GUESSES, ACTION, initialState, TOTAL_INFROMATION } from "./CONSTANTS";
 import { reducer } from "./logic/reducer";
+import { WORD_LENGTH, MAX_GUESSES, ACTION, initialState, TOTAL_INFORMATION } from "./CONSTANTS";
 import ALL_WORDS from "./data/allWords";
-import Board from "./components/Board";
-import Visualizer from "./components/Visualizer";
+import Wordle from "./components/Wordle";
+import Explanation from "./components/Explanation";
+import "./styles/App.css"
+import Header from "./components/Header";
 
 function App() {
+  const [mode, setMode] = useState("explanation")
+  const [darkTheme, setDarkTheme] = useState(true)
   const [state, dispatch] = useReducer(reducer, initialState)
-
-  function handleKey(event) {
-    const key = event.key;
-    
-    if(/^[a-z]$/i.test(key)) {
-      dispatch({type: ACTION.LETTER, key: key.toLowerCase()});
-    }
-
-    else if(key === "Enter") dispatch({type: ACTION.ENTER});
-
-    else if(key === "Backspace") dispatch({type: ACTION.BACKSPACE});
-  }
-
-  useEffect(()=>{
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey); 
-  }, []);
-
+  
   function newRound(e) {
-    if(e) e.currentTarget.blur();
+    if(e) e.currentTarget.blur(); // To remove Retry button focus
+    
     const randomWord = ALL_WORDS[Math.floor(Math.random() * ALL_WORDS.length)];
     dispatch({type: ACTION.INIT, word: randomWord});
   }
@@ -35,26 +23,33 @@ function App() {
     newRound(null);
   }, []);
 
-  function neededBits() {
-    let accumulatedBits = 0;
-    state.bits.forEach(b => b && (accumulatedBits += b));
-    return (TOTAL_INFROMATION - accumulatedBits).toFixed(2);
-  }
+  // Key handling
+  useEffect(()=>{
+    function handleKey(event) {
+      if(mode === "explanation") return
+      
+      const key = event.key;
+      
+      if(/^[a-z]$/i.test(key)) {
+        dispatch({type: ACTION.LETTER, key: key.toLowerCase()});
+      }
+  
+      else if(key === "Enter") dispatch({type: ACTION.ENTER});
+  
+      else if(key === "Backspace") dispatch({type: ACTION.BACKSPACE});
+    }
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey); 
+  }, []);
+
 
   return (
-    <div className="app">
-      {console.log(state)}
-      <div className="leftContainer">
-        <Board rows={MAX_GUESSES} cols={WORD_LENGTH} state={state}/>
-        <div className="message">{state.message}</div>
-        <button className="button" onClick={newRound} >🐼</button>
-        <div className="information">
-          Information needed: <b>{neededBits()}</b> bits
-        </div>
-      </div>
-      <div className="rightContainer">
-        <Visualizer expectedInfo={state.expectedInfo} />
-      </div>
+    <div className={`app ${darkTheme ? "dark" : "light"}`}>
+      <Header setMode={setMode} setDarkTheme={setDarkTheme} />
+      
+      {mode === "explanation" && <Explanation />}
+      {mode === "wordle" && <Wordle state={state} newRound={newRound} />}
     </div>
   );
 }

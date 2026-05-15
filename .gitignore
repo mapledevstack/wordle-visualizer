@@ -13,6 +13,7 @@ dist-ssr
 *.local
 
 To-do.md
+Notes.md
 
 # Editor directories and files
 .vscode/*

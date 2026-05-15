@@ -3,7 +3,7 @@ import { expectedInformation } from "./logic/wordle";
 
 export const WORD_LENGTH = 5;
 export const MAX_GUESSES = 6;
-export const TOTAL_INFROMATION = Math.log2(ALL_WORDS.length);
+export const TOTAL_INFORMATION = Math.log2(ALL_WORDS.length);
 
 export const ACTION = {
   LETTER: "LETTER",

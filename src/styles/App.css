@@ -1,0 +1,26 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app.light {
+  background: white;
+  color: black;
+}
+
+.app.dark {
+  background: black;
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+}
+
+.toggle {
+  display: flex;
+  gap: 8px;
+}
