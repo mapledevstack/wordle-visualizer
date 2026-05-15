@@ -1,5 +1,5 @@
-import ALL_WORDS from "./allwords";
-import { expectedInformation } from "./wordle";
+import ALL_WORDS from "./data/allWords";
+import { expectedInformation } from "./logic/wordle";
 
 export const WORD_LENGTH = 5;
 export const MAX_GUESSES = 6;

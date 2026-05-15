@@ -1,5 +1,5 @@
-import { MAX_GUESSES, WORD_LENGTH } from "./CONSTANTS";
-import ALL_WORDS from "./allwords.js";
+import { MAX_GUESSES, WORD_LENGTH } from "../CONSTANTS";
+import ALL_WORDS from "../data/allWords.js";
 
 const wordSet = new Set(ALL_WORDS);
 

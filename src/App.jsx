@@ -1,9 +1,9 @@
 import { useState, useEffect, useReducer } from "react";
 import { WORD_LENGTH, MAX_GUESSES, ACTION, initialState, TOTAL_INFROMATION } from "./CONSTANTS";
-import Board from "./Board";
-import ALL_WORDS from "./allwords";
-import { reducer } from "./reducer";
-import Visualizer from "./Visualizer";
+import { reducer } from "./logic/reducer";
+import ALL_WORDS from "./data/allWords";
+import Board from "./components/Board";
+import Visualizer from "./components/Visualizer";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -47,7 +47,7 @@ function App() {
       <div className="leftContainer">
         <Board rows={MAX_GUESSES} cols={WORD_LENGTH} state={state}/>
         <div className="message">{state.message}</div>
-        <button className="button" onClick={newRound} >🐼 </button>
+        <button className="button" onClick={newRound} >🐼</button>
         <div className="information">
           Information needed: <b>{neededBits()}</b> bits
         </div>
