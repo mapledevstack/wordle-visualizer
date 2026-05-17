@@ -24,3 +24,11 @@
   display: flex;
   gap: 8px;
 }
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}

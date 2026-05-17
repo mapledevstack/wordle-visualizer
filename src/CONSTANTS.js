@@ -1,5 +1,5 @@
-import ALL_WORDS from "./data/allWords";
-import { expectedInformation } from "./logic/wordle";
+import ALL_WORDS from "./data/allWords.js";
+import BASE_EXPECTED_INFO from "./data/baseExpectedInfo.js"
 
 export const WORD_LENGTH = 5;
 export const MAX_GUESSES = 6;
@@ -21,7 +21,5 @@ export const initialState = {
   bits: Array(MAX_GUESSES).fill(null),
   isPlaying: true,
   message: "",
-  expectedInfo: {}
+  expectedInfo: BASE_EXPECTED_INFO
 }
-
-export const BASE_EXPECTED_INFO = Object.fromEntries(ALL_WORDS.map(w => [w, expectedInformation(w, ALL_WORDS)]));

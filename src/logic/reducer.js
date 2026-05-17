@@ -1,5 +1,5 @@
 import { evaluateResult, filterWords, wordExist, wordAlreadyGuessed, expectedInformation } from "./wordle";
-import { WORD_LENGTH, MAX_GUESSES, ACTION, initialState, BASE_EXPECTED_INFO } from "../CONSTANTS";
+import { WORD_LENGTH, MAX_GUESSES, ACTION, initialState } from "../CONSTANTS.js";
 import ALL_WORDS from "../data/allWords";
 
 export function reducer(state, action) {
@@ -52,7 +52,7 @@ export function reducer(state, action) {
 
     
     case ACTION.INIT:
-      return {...initialState, targetWord: action.word, possibleWords: [...ALL_WORDS], expectedInfo: BASE_EXPECTED_INFO, isPlaying: true}
+      return {...initialState, targetWord: action.word, possibleWords: [...ALL_WORDS], isPlaying: true}
 
   
     default:

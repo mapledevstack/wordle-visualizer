@@ -1,9 +1,43 @@
 import Board from "./Board";
 import Visualizer from "./Visualizer";
-import { WORD_LENGTH, MAX_GUESSES, TOTAL_INFORMATION } from "../CONSTANTS";
+import ALL_WORDS from "../data/allWords";
+import { WORD_LENGTH, MAX_GUESSES, ACTION, initialState, TOTAL_INFORMATION } from "../CONSTANTS.js";
+import { useEffect, useReducer } from "react";
+import { reducer } from "../logic/reducer";
 import "../styles/Wordle.css"
 
-function Wordle({state, newRound}) {
+function Wordle() {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  
+  function newRound(e) {
+    if(e) e.currentTarget.blur(); // To remove Retry button focus
+    
+    const randomWord = ALL_WORDS[Math.floor(Math.random() * ALL_WORDS.length)];
+    dispatch({type: ACTION.INIT, word: randomWord});
+  }
+  
+  useEffect(()=>{
+    newRound(null);
+  }, []);
+
+  // Key handling
+  useEffect(()=>{
+    function handleKey(event) {      
+      const key = event.key;
+      
+      if(/^[a-z]$/i.test(key)) {
+        dispatch({type: ACTION.LETTER, key: key.toLowerCase()});
+      }
+  
+      else if(key === "Enter") dispatch({type: ACTION.ENTER});
+  
+      else if(key === "Backspace") dispatch({type: ACTION.BACKSPACE});
+    }
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey); 
+  }, []);
+
   function neededBits() {
     let accumulatedBits = 0;
     state.bits.forEach(b => b && (accumulatedBits += b));
