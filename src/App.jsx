@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className={`app ${darkTheme ? "dark" : "light"}`}>
-      <Header setMode={setMode} setDarkTheme={setDarkTheme} />
+      <Header mode={mode} setMode={setMode} setDarkTheme={setDarkTheme} />
       
       <div className={mode === "explanation" ? "show" : "hide"}> <Explanation /> </div>
       <div className={mode === "wordle" ? "show" : "hide"}> <Wordle /> </div>
