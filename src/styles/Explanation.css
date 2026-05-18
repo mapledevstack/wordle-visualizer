@@ -12,5 +12,37 @@ body {
   padding-right: 1.5rem;
   box-sizing: border-box;
 
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+p {
+  margin-bottom: 2rem;
+}
+
+h1 {
+  margin-bottom: 4rem;
+}
+
+.proceed-button {
+  display: block;
+  margin: 3rem auto 0;
+  padding: 0.9rem 2.5rem;  
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.proceed-button:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+.proceed-button:active {
+  transform: scale(0.98);
 }

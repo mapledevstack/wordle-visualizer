@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "./components/Header";
-import Explanation from "./components/Explanation";
+import Explanation from "./components/explanation/Explanation";
 import Wordle from "./components/Wordle";
 import "./styles/App.css"
 

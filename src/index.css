@@ -2,3 +2,12 @@ body {
   margin: 0;
   padding: 0;
 }
+
+::selection {
+  background-color: #c678dd;
+  color: #ffffff;
+}
+
+a {
+  color: #c678dd;
+}
