@@ -51,12 +51,12 @@ function Experiment({handleProceed}) {
         }}
       />
 
-      <p>Which of the following two words would you choose for your next guess?</p>
+      <p><br></br>Which of the following two words would you choose for your next guess?</p>
 
       {!selectedGuess && (
         <div style={{ display: "flex", justifyContent: "center", gap: "2rem", marginBottom: "4rem" }}>
           {options.map(word => (
-            <button key={word} className="proceed-button" onClick={() => setSelectedGuess(word)}>
+            <button key={word} className="proceed-button" onClick={() => (setSelectedGuess(word), handleProceed(1))}>
               {word}
             </button>
           ))}
@@ -67,7 +67,7 @@ function Experiment({handleProceed}) {
         <>
           <p>
             Suppose you choose <b>{selectedGuess}</b>. If the hidden answer is{" "}
-            <b>{target}</b>, Wordle would return the following pattern:
+            <b>{target}</b>, Wordle would show:
           </p>
 
           <Board
@@ -82,10 +82,8 @@ function Experiment({handleProceed}) {
           />
 
           <p>
-            After this guess, <b>{remaining[selectedGuess]}</b> possible answers would remain.
+            <br></br>After this guess, <b>{remaining[selectedGuess]}</b> possible answers would remain.
           </p>
-
-          <p>Now consider the alternative.</p>
 
           <div style={{ textAlign: "center", margin: "2rem 0" }}>
             <button className="proceed-button" onClick={() => setSelectedGuess(otherGuess)}>
