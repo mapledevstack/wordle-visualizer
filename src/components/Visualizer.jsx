@@ -16,6 +16,14 @@ function Visualizer({ expectedInfo }) {
         word.toLowerCase().includes(normalizedQuery)
       );
 
+  const totalInfo = filteredInfo.reduce(
+    (sum, [, info]) => sum + info,
+    0
+  );
+
+  const formatProbability = (value) =>
+    `${Number((value * 100).toFixed(1))}%`;
+
   return (
     <div className="visualizer">
       <div className="visualizerHeader">
@@ -58,19 +66,34 @@ function Visualizer({ expectedInfo }) {
             <div className="visualizerHeadingInfo">
               Expected Information
             </div>
+
+            <div className="visualizerHeadingProbability">
+              Probability
+            </div>
           </div>
 
-          {filteredInfo.map(([word, info], index) => (
-            <div key={index} className="wordsAndNums">
-              <div className="words">
-                {word[0].toUpperCase() + word.slice(1)}
-              </div>
+          {filteredInfo.map(([word, info], index) => {
+            const probability =
+              totalInfo === 0
+                ? 1 / filteredInfo.length
+                : info / totalInfo;
 
-              <div className="nums">
-                {info.toFixed(2)}
+            return (
+              <div key={index} className="wordsAndNums">
+                <div className="words">
+                  {word[0].toUpperCase() + word.slice(1)}
+                </div>
+
+                <div className="nums">
+                  {info.toFixed(2)}
+                </div>
+
+                <div className="probability">
+                  {formatProbability(probability)}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

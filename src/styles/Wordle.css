@@ -116,10 +116,14 @@
 .words {
   color: white;
   margin-top: 10px;
+  flex: 1;
 }
 
-.nums {
+.nums,
+.probability {
   margin-top: 10px;
+  width: 120px;
+  text-align: right;
 }
 
 .visualizer {
@@ -209,8 +213,9 @@
   flex: 1;
 }
 
-.visualizerHeadingInfo {
-  width: 160px;
+.visualizerHeadingInfo,
+.visualizerHeadingProbability {
+  width: 120px;
   text-align: right;
 }
 
