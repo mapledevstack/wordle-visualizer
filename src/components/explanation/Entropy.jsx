@@ -4,30 +4,28 @@ function Entropy({ handleProceed }) {
       <h2>Entropy</h2>
 
       <p className="large-quote">
-        A good Wordle guess is not just a word.
-        <br />
-        It is a question designed to reduce uncertainty.
+        A good Wordle guess is more than a word. It is a way of asking a question
+        about the hidden answer.
       </p>
 
       <p>
-        Earlier, we compared two guesses: <b>AUDIO</b> and <b>WACKY</b>.
-        Although AUDIO looks more “normal” as a Wordle guess, WACKY reduced the
-        remaining possibilities much more aggressively. Even when its letters
-        came back gray, the guess still revealed a large amount of information
-        because it ruled out many candidate answers at once.
+        Imagine you are down to just two possible answers. In that case, one
+        well-chosen guess can tell you everything you need to know. If the two
+        words would return different color patterns, a single response is
+        enough to decide between them.
       </p>
 
       <p>
-        This idea sits at the center of information theory. Information is not
-        measured by how surprising or clever something feels. It is measured by
-        how much uncertainty it removes.
+        Now imagine the opposite: a guess that produces the same pattern for all
+        remaining words. That guess wastes a turn, because it leaves the list of
+        possibilities essentially unchanged.
       </p>
 
       <div className="highlight-box">
         <p style={{ marginBottom: 0 }}>
           <i>
-            The more uncertainty a message removes, the more information it
-            contains.
+            The value of a guess is how much it reduces uncertainty, not how much
+            it matches your intuition.
           </i>
         </p>
       </div>
@@ -35,59 +33,20 @@ function Entropy({ handleProceed }) {
       <div className="section-divider" />
 
       <p>
-        Suppose you somehow knew that only two answers were still possible:
-      </p>
-
-      <ul>
-        <li>LINER</li>
-        <li>TIGER</li>
-      </ul>
-
-      <p>
-        At that point, the game feels almost solved already. You are no longer
-        trying to “cover letters” or search broadly through the alphabet. You
-        simply need a guess that separates the two possibilities. If one pattern
-        implies LINER and another implies TIGER, then a single response is
-        enough to determine the answer completely.
+        This is what entropy measures: the amount of uncertainty you have before
+        a new response arrives. In Wordle, entropy is a way to measure how many
+        possible answers are still in play.
       </p>
 
       <p>
-        Now compare that with a very different situation. Imagine making a guess
-        where every remaining answer produces exactly the same color pattern. No
-        matter what the hidden word is, the board responds identically. After
-        the guess, you are left with essentially the same uncertainty as before.
-        The same answers remain plausible, and the game has barely progressed.
-      </p>
-
-      <p>
-        These two guesses may both consume one turn, but they clearly do not
-        provide the same amount of information. One collapses the search space
-        immediately, while the other barely changes it at all.
-      </p>
-
-      <p>
-        Information theory begins with the idea that this difference should be
-        measurable. Claude Shannon called this quantity <b>entropy</b>.
-      </p>
-
-      <div className="section-divider" />
-
-      <p>
-        Entropy measures how much uncertainty exists before new information is
-        received. In Wordle, entropy represents how uncertain we are about the
-        hidden word at any moment in the game.
-      </p>
-
-      <p>
-        High entropy means many answers are still plausible. Low entropy means
-        the possibilities have been narrowed down to only a few. Every guess
-        changes that uncertainty, and strong guesses reduce it quickly by
-        producing outcomes that sharply divide the remaining possibilities.
+        If every remaining word is equally likely, the uncertainty is simply
+        tied to the number of possibilities. In that case, the entropy is
+        <b> log₂(N)</b>, where <b>N</b> is the number of remaining words.
       </p>
 
       <div className="entropy-formula">
         <div className="entropy-formula-label">
-          Shannon Entropy
+          When outcomes are equally likely
         </div>
 
         <div className="entropy-formula-equation">
@@ -96,72 +55,60 @@ function Entropy({ handleProceed }) {
       </div>
 
       <p>
-        If there are <b>N</b> equally likely possibilities, entropy grows
-        logarithmically with the number of possibilities. This quantity is
-        measured in <b>bits</b>.
+        That formula tells us that doubling the number of possibilities adds one
+        extra bit of uncertainty. Two possibilities are 1 bit. Four possibilities
+        are 2 bits. Eight possibilities are 3 bits.
       </p>
 
-      <div className="entropy-grid">
-        <div className="entropy-card">
-          <div className="entropy-card-title">
-            2 Possibilities
-          </div>
+      <p>
+        But Wordle is usually not a problem of perfectly equal possibilities.
+        Different answers can be more or less likely depending on the feedback
+        you have already seen. In that case, entropy is a weighted average of all
+        the possible outcomes.
+      </p>
 
-          <div className="entropy-card-value">
-            1 bit
-          </div>
-
-          <div className="entropy-card-description">
-            A single yes-or-no distinction is enough to determine the answer.
-          </div>
+      <div className="entropy-formula">
+        <div className="entropy-formula-label">
+          The full Shannon entropy formula
         </div>
 
-        <div className="entropy-card">
-          <div className="entropy-card-title">
-            4 Possibilities
-          </div>
-
-          <div className="entropy-card-value">
-            2 bits
-          </div>
-
-          <div className="entropy-card-description">
-            Two binary decisions are required to isolate the correct outcome.
-          </div>
-        </div>
-
-        <div className="entropy-card">
-          <div className="entropy-card-title">
-            8 Possibilities
-          </div>
-
-          <div className="entropy-card-value">
-            3 bits
-          </div>
-
-          <div className="entropy-card-description">
-            Every additional bit doubles the number of distinguishable outcomes.
-          </div>
+        <div className="entropy-formula-equation">
+          H = −∑ pᵢ log₂(pᵢ)
         </div>
       </div>
 
       <p>
-        This changes the way Wordle should be viewed. The objective is not
-        merely to guess words containing common letters. The real objective is
-        to choose guesses that reduce uncertainty as efficiently as possible.
+        Here, each <b>pᵢ</b> is the probability of one specific outcome. The term
+        <b>−log₂(pᵢ)</b> is the amount of information that outcome carries.
       </p>
 
       <p>
-        Strong guesses create very different outcomes for different answers,
-        rapidly shrinking the remaining search space. Weak guesses tend to lump
-        many answers together, revealing relatively little.
+        The formula says: take every possible result, figure out how likely it is,
+        measure how surprising that result would be, and average those values.
+        Rare outcomes carry more information, because they rule out a larger
+        fraction of the remaining possibilities.
+      </p>
+
+      <div className="highlight-box">
+        <p style={{ marginBottom: 0 }}>
+          <i>
+            A strong guess is one that creates a wide range of useful, probable
+            responses.
+          </i>
+        </p>
+      </div>
+
+      <p>
+        In Wordle, that means a good guess is one whose feedback patterns split
+        the remaining words into smaller groups. If the groups are balanced,
+        the guess is likely to give you more information no matter what the true
+        answer is.
       </p>
 
       <p>
-        This is why unusual words can sometimes outperform intuitive ones. A
-        word like <b>WACKY</b> may look inefficient at first glance, but if it
-        separates the remaining possibilities more effectively, then it carries
-        more information.
+        That is why a word like <b>WACKY</b> can sometimes be better than a more
+        ordinary guess. It may produce more distinct responses across the
+        remaining words, so it is more likely to reduce uncertainty.
       </p>
 
       <p className="large-quote">

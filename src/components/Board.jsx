@@ -10,9 +10,15 @@ function Board({ rows, cols, state}) {
   }
 
   function getExpectedColor(actual, expected) {
-    // if (actual < expected) return "red";
-    // if (actual > expected) return "green";
-    // else return "white";
+    if (actual == null || expected == null || Number.isNaN(actual) || Number.isNaN(expected)) {
+      return "white";
+    }
+
+    const delta = actual - expected;
+    const tolerance = 0.01;
+
+    if (delta > tolerance) return "lime";
+    if (delta < -tolerance) return "#ff6b6b";
     return "white";
   }
 
@@ -20,7 +26,7 @@ function Board({ rows, cols, state}) {
     <div className="board">
       {Array(rows).fill(null).map((_, rowIndex) => {
         const word = guesses[rowIndex] || "";
-        const expectedColor = getExpectedColor(Number(state.bits[rowIndex]), Number(state.expectedInfo[word]));
+        const expectedColor = getExpectedColor(Number(state.bits[rowIndex]), Number(state.expectedBits[rowIndex]));
         return (
           <div className="rowAndBits" key={rowIndex}>
             <div className="row">

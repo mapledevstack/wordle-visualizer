@@ -19,6 +19,7 @@ export const initialState = {
   targetWord: "",
   result: Array(MAX_GUESSES).fill(null).map(() => Array(WORD_LENGTH).fill(null)),
   bits: Array(MAX_GUESSES).fill(null),
+  expectedBits: Array(MAX_GUESSES).fill(null),
   isPlaying: true,
   message: "",
   expectedInfo: BASE_EXPECTED_INFO

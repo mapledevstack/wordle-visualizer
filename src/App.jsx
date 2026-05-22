@@ -8,11 +8,13 @@ function App() {
   const [mode, setMode] = useState("explanation")
   const [darkTheme, setDarkTheme] = useState(true)
 
+  const appClass = `app ${darkTheme ? "dark" : "light"} ${mode === "wordle" ? "wordle-mode" : ""}`
+
   return (
-    <div className={`app ${darkTheme ? "dark" : "light"}`}>
+    <div className={appClass}>
       <Header mode={mode} setMode={setMode} setDarkTheme={setDarkTheme} />
       
-      <div className={mode === "explanation" ? "show" : "hide"}> <Explanation /> </div>
+      <div className={mode === "explanation" ? "show" : "hide"}> <Explanation setMode={setMode} /> </div>
       <div className={mode === "wordle" ? "show" : "hide"}> <Wordle /> </div>
     </div>
   );

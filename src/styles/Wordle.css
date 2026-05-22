@@ -34,23 +34,31 @@
   height: 20px;
 }
 
+.wordle {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  align-items: stretch;
+}
+
 .leftContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 15px;
+  padding: 40px;
 }
 
 .rightContainer {
   display: flex;
   flex-direction: column;
-  justify-content: first baseline;
+  justify-content: flex-start;
   align-items: center;
   color: white;
   max-height: 100vh;
-  overflow-y: auto;
-  padding-top: 50px;
+  overflow: hidden;
+  padding: 100px 40px 40px;
 }
 
 .leftContainer, .rightContainer {
@@ -59,15 +67,31 @@
 
 .button {
   border: none;
-  font-size: 2rem;
-  background-color: black;
+  font-size: 1.75rem;
+  padding: 0.85rem 1.2rem;
+  background-color: rgba(255, 255, 255, 0.08);
   color: white;
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
   cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  background-color: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.button:active {
+  transform: translateY(0);
+  background-color: rgba(255, 255, 255, 0.14);
 }
 
 .information {
   color: white;
   font-size: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .bits {
@@ -97,3 +121,178 @@
 .nums {
   margin-top: 10px;
 }
+
+.visualizer {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  min-height: 0;
+  max-height: calc(100vh - 220px);
+}
+
+.visualizerHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 1rem 1rem 0.75rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px);
+}
+
+.visualizerSearch {
+  flex: 1 1 240px;
+  min-width: 180px;
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.visualizerSearch::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.visualizerSortButton {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.visualizerSortButton:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.visualizerSortButton:active {
+  transform: translateY(0);
+}
+
+.visualizerCount {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.visualizerHeadingRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 0.85;
+}
+
+.visualizerHeadingWord {
+  flex: 1;
+}
+
+.visualizerHeadingInfo {
+  width: 160px;
+  text-align: right;
+}
+
+.visualizerList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem 1rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  overflow-y: auto;
+  min-height: 0;
+  max-height: calc(100vh - 340px);
+}
+
+.visualizerEmpty {
+  color: rgba(255, 255, 255, 0.75);
+  padding: 1rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.app.light .cell {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.app.light .message,
+.app.light .information,
+.app.light .words,
+.app.light .nums,
+.app.light .bits {
+  color: #111;
+}
+
+.app.light .button {
+  color: #111;
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.app.light .button:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.app.light .visualizerHeader,
+.app.light .visualizerList,
+.app.light .visualizerEmpty {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.app.light .visualizerSearch {
+  color: #111;
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.app.light .visualizerSearch::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.app.light .visualizerSortButton {
+  border-color: rgba(0, 0, 0, 0.14);
+  background: rgba(0, 0, 0, 0.05);
+  color: #111;
+}
+
+.app.light .visualizerSortButton:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.app.light .visualizerCount,
+.app.light .visualizerHeadingRow {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.app.light .visualizerHeadingInfo,
+.app.light .visualizerHeadingWord {
+  color: rgba(0, 0, 0, 0.75);
+}
+

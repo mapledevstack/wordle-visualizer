@@ -22,7 +22,15 @@ function Wordle() {
 
   // Key handling
   useEffect(()=>{
-    function handleKey(event) {      
+    function handleKey(event) {
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)
+      ) {
+        return;
+      }
+
       const key = event.key;
       
       if(/^[a-z]$/i.test(key)) {
@@ -49,7 +57,7 @@ function Wordle() {
       <div className="leftContainer">
         <Board rows={MAX_GUESSES} cols={WORD_LENGTH} state={state}/>
         <div className="message">{state.message}</div>
-        <button className="button" onClick={newRound} >🐼</button>
+        <button className="button" onClick={newRound} title="New round">↻</button>
         <div className="information">
           Information needed: <b>{neededBits()}</b> bits
         </div>

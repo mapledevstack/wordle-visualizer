@@ -5,7 +5,7 @@ import Experiment from "./Experiment"
 import Entropy from "./Entropy"
 import ExpectedInformation from "./ExpectedInformation"
 
-function Explanation() {
+function Explanation({setMode}) {
   const [progress, setProgress] = useState(0)
 
   function handleProceed(nextProgress) {
@@ -25,7 +25,7 @@ function Explanation() {
         <Introduction handleProceed={handleProceed}/>
         {progress >= 1 && <Experiment handleProceed={handleProceed}/>}
         {progress >= 2 && <Entropy handleProceed={handleProceed}/>}
-        {progress >= 3 && <ExpectedInformation handleProceed={handleProceed} />}
+        {progress >= 3 && <ExpectedInformation handleProceed={handleProceed} setMode={setMode} />}
       </div>
     </div>
   )

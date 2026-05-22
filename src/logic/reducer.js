@@ -32,9 +32,11 @@ export function reducer(state, action) {
     const isWin = result.every(r => r === "fullMatch");
     const gameOver = isWin || state.guesses.length + 1 >= MAX_GUESSES;
 
+    const expectedBit = expectedInformation(state.currentGuess, state.possibleWords);
     const newPossibleWords = filterWords(state.currentGuess, result, state.possibleWords);
     const currentBit = -Math.log2(newPossibleWords.length/state.possibleWords.length);
     const newBits = state.bits.map((bit, index) => index === state.guesses.length ? currentBit : bit);
+    const newExpectedBits = state.expectedBits.map((bit, index) => index === state.guesses.length ? expectedBit : bit);
 
     const expectedInfo = {};
     newPossibleWords.forEach(word => {
@@ -42,7 +44,7 @@ export function reducer(state, action) {
     });
 
     const message = gameOver ? (isWin ? "" : `Word is ${state.targetWord.toUpperCase()}`) : "";
-    return {...state, guesses: [...state.guesses, state.currentGuess], currentGuess: "", result: newResult, isPlaying: !gameOver, message: message, possibleWords: newPossibleWords, bits: newBits, expectedInfo: expectedInfo}
+    return {...state, guesses: [...state.guesses, state.currentGuess], currentGuess: "", result: newResult, isPlaying: !gameOver, message: message, possibleWords: newPossibleWords, bits: newBits, expectedBits: newExpectedBits, expectedInfo: expectedInfo}
   
     case ACTION.BACKSPACE:
     if(state.currentGuess.length === 0) {
