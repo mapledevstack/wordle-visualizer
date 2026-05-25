@@ -163,10 +163,7 @@ The goal of this project is not just solving Wordle efficiently, but making entr
 
 Some possible future additions:
 
-- Guess tree visualizations
-- Hard mode analysis
 - Animated entropy demonstrations
-- Pattern probability heatmaps
 - Performance optimizations
 - Mobile UX improvements
 
