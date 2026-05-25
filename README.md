@@ -24,6 +24,14 @@ https://wordle-visualizer.vercel.app/
 
 A guided explanation that introduces concepts step-by-step through interactive examples and experiments.
 
+<p align="center">
+  <img src="./screenshots/explanation1.png" width="850" />
+</p>
+
+<p align="center">
+  <img src="./screenshots/explanation2.png" width="850" />
+</p>
+
 Topics include:
 
 - Wordle feedback mechanics
@@ -38,6 +46,10 @@ The explanation is designed more like an interactive essay than traditional docu
 ---
 
 ## Playable Wordle Mode
+
+<p align="center">
+  <img src="./screenshots/wordle1.png" width="850" />
+</p>
 
 A complete Wordle interface with:
 
