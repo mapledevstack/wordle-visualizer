@@ -1,4 +1,10 @@
+import { useState } from "react";
+
 function Entropy({ handleProceed }) {
+  const [N, setN] = useState(32);
+
+  const entropy = Math.log2(N);
+
   return (
     <section className="entropy">
       <h2>Entropy</h2>
@@ -54,6 +60,66 @@ function Entropy({ handleProceed }) {
         </div>
       </div>
 
+      <div className="entropy-explorer">
+        <div className="entropy-explorer-header">
+          <div className="entropy-explorer-label">
+            Interactive intuition
+          </div>
+
+          <div className="entropy-explorer-title">
+            How many yes-or-no questions would you need?
+          </div>
+        </div>
+
+        <p className="entropy-explorer-text">
+          Imagine one item hidden among <b>{N}</b> equally possible choices.
+          If every question can only split the possibilities into two groups,
+          the minimum amount of information needed to isolate the correct answer
+          is:
+        </p>
+
+        <div className="entropy-explorer-formula">
+          log₂({N}) = {entropy.toFixed(2)} bits
+        </div>
+
+        <p className="entropy-explorer-caption">
+          Roughly <b>{Math.ceil(entropy)}</b> perfectly efficient yes-or-no
+          questions.
+        </p>
+
+        <input
+          type="range"
+          min="2"
+          max="4096"
+          step="1"
+          value={N}
+          onChange={(e) => setN(Number(e.target.value))}
+          className="entropy-slider"
+        />
+
+        <div className="entropy-slider-labels">
+          <span>2</span>
+          <span>{N} possibilities</span>
+          <span>4096</span>
+        </div>
+
+        <p className="entropy-explorer-text">
+          Notice how slowly the value grows. Doubling the number of possible
+          answers only adds one extra bit of uncertainty. Going from 32 words
+          to 64 words feels like a huge jump, but from the perspective of
+          information, it only means you need one additional binary decision
+          to isolate the answer.
+        </p>
+
+        <p className="entropy-explorer-text">
+          This is why Wordle feedback is so powerful. Each color pattern acts
+          like a carefully structured question that cuts away large parts of
+          the remaining search space. A strong guess is valuable because it
+          creates responses that divide the possibilities efficiently, reducing
+          the number of future decisions you still need to make.
+        </p>
+      </div>
+
       <p>
         That formula tells us that doubling the number of possibilities adds one
         extra bit of uncertainty. Two possibilities are 1 bit. Four possibilities
@@ -79,7 +145,7 @@ function Entropy({ handleProceed }) {
 
       <p>
         Here, each <b>pᵢ</b> is the probability of one specific outcome. The term
-        <b>−log₂(pᵢ)</b> is the amount of information that outcome carries.
+        <b> −log₂(pᵢ)</b> is the amount of information that outcome carries.
       </p>
 
       <p>

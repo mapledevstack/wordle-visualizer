@@ -195,6 +195,78 @@ li {
   background: currentColor;
 }
 
+.entropy-explorer {
+  margin: 4rem 0;
+  padding: 2.5rem 2rem;
+
+  border-radius: 28px;
+
+  backdrop-filter: blur(14px);
+}
+
+.entropy-explorer-header {
+  margin-bottom: 2rem;
+}
+
+.entropy-explorer-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+
+  opacity: 0.55;
+
+  margin-bottom: 0.75rem;
+}
+
+.entropy-explorer-title {
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+
+  margin-bottom: 2rem;
+}
+
+.entropy-explorer-text {
+  margin-bottom: 2rem;
+}
+
+.entropy-explorer-formula {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 700;
+
+  text-align: center;
+
+  letter-spacing: -0.05em;
+  line-height: 1;
+
+  margin: 3rem 0 1.5rem;
+}
+
+.entropy-explorer-caption {
+  text-align: center;
+  opacity: 0.7;
+
+  margin-bottom: 3rem;
+}
+
+.entropy-slider {
+  width: 100%;
+  margin: 1rem 0 0.75rem;
+
+  accent-color: #c678dd;
+}
+
+.entropy-slider-labels {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 0.95rem;
+  opacity: 0.65;
+
+  margin-bottom: 3rem;
+}
+
 @media (max-width: 700px) {
   .main-content {
     font-size: 1.05rem;
@@ -207,5 +279,97 @@ li {
 
   .entropy-card {
     padding: 1.25rem;
+  }
+
+  .entropy-explorer {
+    padding: 2rem 1.25rem;
+  }
+}
+
+.guess-selector {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  margin: 3rem 0 2rem;
+}
+
+.guess-option {
+  padding: 0.9rem 1.4rem;
+
+  border: none;
+  border-radius: 16px;
+
+  font: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.guess-option:hover {
+  transform: translateY(-2px);
+}
+
+.guess-option.active {
+  outline: 2px solid #c678dd;
+}
+
+.partition-visualizer {
+  margin: 2rem 0 4rem;
+  padding: 2rem;
+
+  border-radius: 28px;
+}
+
+.partition-header {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+.partition-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  margin-bottom: 2rem;
+}
+
+.partition-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.partition-bar {
+  height: 18px;
+  border-radius: 999px;
+
+  background: #c678dd;
+
+  min-width: 6px;
+
+  transition: width 0.35s ease;
+}
+
+.partition-value {
+  font-size: 0.95rem;
+  opacity: 0.75;
+}
+
+.partition-description {
+  margin-bottom: 0;
+  opacity: 0.9;
+}
+
+@media (max-width: 700px) {
+  .guess-selector {
+    flex-direction: column;
+  }
+
+  .guess-option {
+    width: 100%;
   }
 }
