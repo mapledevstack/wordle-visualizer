@@ -1,72 +1,177 @@
-# Wordle React Visualizer
+# Wordle Information Theory Visualizer
 
-A modern React-based tool for learning and applying information-driven Wordle strategy.
+An interactive website for learning the mathematics and information theory behind optimal Wordle strategy.
 
-This website combines an interactive Wordle board with a guided explanation section. It helps users understand how to choose strong guesses using information theory, then lets them apply that reasoning directly in the game.
+This project explores a simple idea:
 
-## Key Features
+> Every Wordle guess is a question.
 
-- Guided explanation mode with progressive instruction on Wordle strategy
-- Educational pages covering the game logic, entropy, and expected information
-- Full interactive Wordle board with keyboard input support
-- Automatic candidate filtering based on guess feedback
-- Searchable visualizer with live filtering and sort reversal
-- Expected information scoring for each candidate guess
-- Responsive light/dark theme support
-- Internal scrolling for the visualizer list so the search controls remain fixed
-- Clear feedback colors and information indicators for each guess
+When you make a guess, Wordle responds with information — green, yellow, and gray tiles that reduce uncertainty about the hidden word. Some guesses barely help. Others eliminate thousands of possibilities instantly.
 
-## How It Works
+This website uses Wordle as a concrete way to teach ideas from information theory, including entropy, expected information, uncertainty reduction, and optimal guessing strategies.
 
-The app treats Wordle as an information optimization problem:
+It combines an interactive explanation with a fully playable Wordle visualizer so users can immediately apply the concepts they learn.
 
-1. Track the current set of remaining candidate words after each guess.
-2. For every possible next guess, simulate the feedback pattern it would produce against each candidate.
-3. Group candidate words by feedback pattern and measure how much each pattern reduces the search space.
-4. Calculate the expected information gain using Shannon entropy across all possible outcomes.
-5. Rank candidate guesses by expected information so the most informative words appear first.
+## Live Demo
 
-This means the application does not simply choose the most common letters. Instead, it chooses guesses that are expected to split the remaining possibilities most effectively.
+https://wordle-visualizer.vercel.app/
 
-## Project Structure
+---
 
-- `src/App.jsx` — main application shell, mode selection, and theme handling
-- `src/components/Wordle.jsx` — primary Wordle game screen and state management
-- `src/components/Board.jsx` — Wordle board rendering and colored feedback display
-- `src/components/Visualizer.jsx` — candidate word list, search filter, and sort controls
-- `src/components/Header.jsx` — light/dark theme toggle and mode navigation
-- `src/components/explanation/` — educational content and step-by-step explanation pages
-- `src/styles/` — component and layout styles for the app
-- `src/logic/` — Wordle logic, entropy calculation, guess validation, and reducer state updates
-- `src/data/` — word lists and precomputed base expected information values
+# Features
 
-## Installation
+## Interactive Explanation Mode
 
-Make sure you have Node.js installed, then run:
+A guided explanation that introduces concepts step-by-step through interactive examples and experiments.
+
+Topics include:
+
+- Wordle feedback mechanics
+- Candidate filtering
+- Information as uncertainty reduction
+- Expected information gain
+- Shannon entropy
+- Why some guesses are more informative than others
+
+The explanation is designed more like an interactive essay than traditional documentation.
+
+---
+
+## Playable Wordle Mode
+
+A complete Wordle interface with:
+
+- Keyboard input support
+- Colored feedback rendering
+- Real-time state updates
+- Guess validation
+- Candidate tracking
+
+---
+
+## Entropy-Based Guess Visualizer
+
+For every possible guess, the app:
+
+1. Simulates feedback against every remaining answer
+2. Groups outcomes by feedback pattern
+3. Measures how effectively each guess splits the search space
+4. Computes expected information using Shannon entropy
+5. Ranks guesses from most informative to least informative
+
+This means the solver is not simply looking for common letters — it is actively trying to maximize expected information gain.
+
+---
+
+# Project Structure
+
+```txt
+src
+├── assets
+│
+├── components
+│   ├── explanation
+│   │   ├── Entropy.jsx
+│   │   ├── ExpectedInformation.jsx
+│   │   ├── Experiment.jsx
+│   │   ├── Explanation.jsx
+│   │   └── Introduction.jsx
+│   │
+│   ├── Board.jsx
+│   ├── Header.jsx
+│   ├── Visualizer.jsx
+│   └── Wordle.jsx
+│
+├── data
+│   ├── allWords.js
+│   └── baseExpectedInfo.js
+│
+├── logic
+│   ├── reducer.js
+│   └── wordle.js
+│
+├── styles
+│   ├── App.css
+│   ├── Explanation.css
+│   └── Wordle.css
+│
+├── App.jsx
+├── CONSTANTS.js
+├── index.css
+└── main.jsx
+```
+
+---
+
+# How It Works
+
+The app treats Wordle as an information optimization problem.
+
+After each guess:
+
+- The remaining valid candidate words are filtered
+- Every possible next guess is simulated
+- Feedback patterns are generated
+- Outcome probabilities are calculated
+- Expected information gain is measured using entropy
+
+The best guesses are the ones expected to reduce uncertainty the most.
+
+Mathematically, the project is heavily inspired by Claude Shannon's work on information theory.
+
+---
+
+# Tech Stack
+
+- React
+- Vite
+- JavaScript
+- CSS
+- Reducer-based state management
+
+---
+
+# Running Locally
+
+Clone the repository and install dependencies:
 
 ```bash
 npm install
 ```
 
-## Running Locally
-
-Start the development server with:
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-Open the local URL shown in the terminal to use the app.
+Then open the local URL shown in the terminal.
 
-## Notes
+---
 
-- Use the mode switch in the header to toggle between the educational explanation pages and the interactive Wordle board.
-- The explanation flow includes step-by-step sections on the game, experiments, entropy, and expected information.
-- The visualizer includes a search box that filters candidate words as you type and a button to reverse sort order.
-- The light/dark theme toggle adjusts the app appearance for both the explanation and Wordle screens.
+# Why I Made This
 
-## Development
+Most Wordle solvers focus only on giving the "best" word.
 
-- The app uses Vite for fast development and build performance.
-- Styles are implemented with CSS modules in the `src/styles` folder.
-- The Wordle state is managed with a reducer for predictable game updates.
+I wanted to build something that explains *why* certain guesses are strong and how information theory naturally emerges from the game itself.
+
+The goal of this project is not just solving Wordle efficiently, but making entropy and information gain feel intuitive through interaction and experimentation.
+
+---
+
+# Future Ideas
+
+Some possible future additions:
+
+- Guess tree visualizations
+- Hard mode analysis
+- Animated entropy demonstrations
+- Pattern probability heatmaps
+- Performance optimizations
+- Mobile UX improvements
+
+---
+
+# License
+
+This project is open source and available under the MIT License.
