@@ -16,6 +16,8 @@ function App() {
       
       <div className={mode === "explanation" ? "show" : "hide"}> <Explanation setMode={setMode} /> </div>
       <div className={mode === "wordle" ? "show" : "hide"}> <Wordle /> </div>
+
+      
     </div>
   );
 }

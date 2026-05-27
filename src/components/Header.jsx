@@ -1,5 +1,5 @@
+import { Github } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
-
 
 function Header({mode, setMode, setDarkTheme}) {
   const [showHeader, setShowHeader] = useState(true)
@@ -35,6 +35,16 @@ function Header({mode, setMode, setDarkTheme}) {
         <button onClick={() => setMode("explanation")}>Explanation</button>
         <button onClick={() => setMode("wordle")}>Wordle</button>
       </div>
+      
+      <a
+        href="https://github.com/mapledevstack/wordle-visualizer"
+        target="_blank"
+        rel="noreferrer"
+        className="github-button"
+      >
+        <Github size={18}/>
+        <span>GitHub</span>
+      </a>
 
       <div className="toggle">
         <button onClick={() => setDarkTheme(false)}>Light</button>
