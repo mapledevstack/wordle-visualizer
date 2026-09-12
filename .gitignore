@@ -25,3 +25,5 @@ Notes.md
 *.njsproj
 *.sln
 *.sw?
+
+.next
