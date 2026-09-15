@@ -78,9 +78,13 @@ This means the solver is not simply looking for common letters — it is activel
 # Project Structure
 
 ```txt
+app
+├── layout.tsx
+├── page.tsx
+└── wordle
+    └── page.tsx
+
 src
-├── assets
-│
 ├── components
 │   ├── explanation
 │   │   ├── Entropy.jsx
@@ -89,6 +93,7 @@ src
 │   │   ├── Explanation.jsx
 │   │   └── Introduction.jsx
 │   │
+│   ├── AppShell.jsx
 │   ├── Board.jsx
 │   ├── Header.jsx
 │   ├── Visualizer.jsx
@@ -107,10 +112,8 @@ src
 │   ├── Explanation.css
 │   └── Wordle.css
 │
-├── App.jsx
 ├── CONSTANTS.js
-├── index.css
-└── main.jsx
+└── index.css
 ```
 
 ---
@@ -136,7 +139,7 @@ Mathematically, the project is heavily inspired by Claude Shannon's work on info
 # Tech Stack
 
 - React
-- Vite
+- Next.js (App Router)
 - JavaScript
 - CSS
 - Reducer-based state management

@@ -1,4 +1,6 @@
-const HomePage = () => {
-  return <div>page</div>
+import Explanation from "../src/components/explanation/Explanation"
+
+const ExplanationPage = () => {
+  return <Explanation />
 }
-export default HomePage
+export default ExplanationPage

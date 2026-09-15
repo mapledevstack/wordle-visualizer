@@ -1,22 +1,25 @@
+"use client"
+
 import { Github } from "lucide-react"
+import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
-function Header({mode, setMode, setDarkTheme}) {
+function Header({ mode, setDarkTheme }) {
   const [showHeader, setShowHeader] = useState(true)
   const prevScrollY = useRef(0)
 
   useEffect(() => {
-    if(mode !== "explanation") {
+    if (mode !== "explanation") {
       setShowHeader(true)
       return
     }
 
     function handleScroll() {
       const currScrollY = window.scrollY
-      
-      if(currScrollY < 50) {
+
+      if (currScrollY < 50) {
         setShowHeader(true)
-      } else if(currScrollY > prevScrollY.current) {
+      } else if (currScrollY > prevScrollY.current) {
         setShowHeader(false)
       } else {
         setShowHeader(true)
@@ -32,17 +35,17 @@ function Header({mode, setMode, setDarkTheme}) {
   return (
     <div className={showHeader ? "header visible" : "header hidden"}>
       <div className="toggle">
-        <button onClick={() => setMode("explanation")}>Explanation</button>
-        <button onClick={() => setMode("wordle")}>Wordle</button>
+        <Link href="/">Explanation</Link>
+        <Link href="/wordle">Wordle</Link>
       </div>
-      
+
       <a
         href="https://github.com/mapledevstack/wordle-visualizer"
         target="_blank"
         rel="noreferrer"
         className="github-button"
       >
-        <Github size={18}/>
+        <Github size={18} />
         <span>GitHub</span>
       </a>
 

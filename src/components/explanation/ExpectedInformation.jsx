@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
-function ExpectedInformation({ handleProceed, setMode }) {
-  const [selectedGuess, setSelectedGuess] = useState("balanced");
+function ExpectedInformation() {
+  const [selectedGuess, setSelectedGuess] = useState("balanced")
+  const router = useRouter()
 
   const examples = {
     balanced: {
@@ -17,9 +19,9 @@ function ExpectedInformation({ handleProceed, setMode }) {
       description:
         "This guess creates a few excellent outcomes, but most responses still leave a very large cluster of possible answers behind.",
     },
-  };
+  }
 
-  const current = examples[selectedGuess];
+  const current = examples[selectedGuess]
 
   return (
     <section className="expected-information">
@@ -95,16 +97,12 @@ function ExpectedInformation({ handleProceed, setMode }) {
                 }}
               />
 
-              <span className="partition-value">
-                {size} words
-              </span>
+              <span className="partition-value">{size} words</span>
             </div>
           ))}
         </div>
 
-        <p className="partition-description">
-          {current.description}
-        </p>
+        <p className="partition-description">{current.description}</p>
       </div>
 
       <p>
@@ -120,13 +118,9 @@ function ExpectedInformation({ handleProceed, setMode }) {
         asking:
       </p>
 
-      <p className="large-quote">
-        “What is the best thing that could happen?”
-      </p>
+      <p className="large-quote">“What is the best thing that could happen?”</p>
 
-      <p>
-        ...the algorithm asks:
-      </p>
+      <p>...the algorithm asks:</p>
 
       <p className="large-quote">
         “On average, how much uncertainty will this guess remove?”
@@ -147,14 +141,11 @@ function ExpectedInformation({ handleProceed, setMode }) {
         are the ones expected to reveal the most information on average.
       </p>
 
-      <button
-        className="proceed-button"
-        onClick={() => setMode("wordle")}
-      >
+      <button className="proceed-button" onClick={() => router.push("/wordle")}>
         Try choosing the most informative word
       </button>
     </section>
-  );
+  )
 }
 
-export default ExpectedInformation;
+export default ExpectedInformation
