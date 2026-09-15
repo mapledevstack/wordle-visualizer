@@ -3,6 +3,7 @@
 import Board from "./Board"
 import Visualizer from "./Visualizer"
 import ALL_WORDS from "../data/allWords"
+import TargetWord from "./TargetWord"
 import {
   WORD_LENGTH,
   MAX_GUESSES,
@@ -61,6 +62,7 @@ function Wordle() {
   return (
     <div className="wordle">
       <div className="leftContainer">
+        <TargetWord word={state.targetWord} />
         <Board rows={MAX_GUESSES} cols={WORD_LENGTH} state={state} />
         <div className="message">{state.message}</div>
         <button className="button" onClick={newRound} title="New round">
