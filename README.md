@@ -58,6 +58,8 @@ A complete Wordle interface with:
 - Real-time state updates
 - Guess validation
 - Candidate tracking
+- Hidden target word with a toggle to reveal it
+- "Today's Wordle" button that loads the official NYT daily answer
 
 ---
 
@@ -79,6 +81,9 @@ This means the solver is not simply looking for common letters — it is activel
 
 ```txt
 app
+├── api
+│   └── todays-word
+│       └── route.ts
 ├── layout.tsx
 ├── page.tsx
 └── wordle
@@ -96,6 +101,7 @@ src
 │   ├── AppShell.jsx
 │   ├── Board.jsx
 │   ├── Header.jsx
+│   ├── TargetWord.jsx
 │   ├── Visualizer.jsx
 │   └── Wordle.jsx
 │
@@ -140,8 +146,9 @@ Mathematically, the project is heavily inspired by Claude Shannon's work on info
 
 - React
 - Next.js (App Router)
-- JavaScript
+- JavaScript (TypeScript for app routes)
 - CSS
+- lucide-react (icons)
 - Reducer-based state management
 
 ---
@@ -161,6 +168,13 @@ npm run dev
 ```
 
 Then open the local URL shown in the terminal.
+
+For a production build:
+
+```bash
+npm run build
+npm run start
+```
 
 ---
 
