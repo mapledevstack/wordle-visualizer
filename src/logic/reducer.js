@@ -3,7 +3,7 @@ import { WORD_LENGTH, MAX_GUESSES, ACTION, initialState } from "../CONSTANTS.js"
 import ALL_WORDS from "../data/allWords";
 
 export function reducer(state, action) {
-  if(!state.isPlaying && action.type !== ACTION.INIT) return state;
+  if(!state.isPlaying && action.type !== ACTION.INIT && action.type !== ACTION.MESSAGE) return state;
 
   switch (action.type) {
     case ACTION.LETTER:
@@ -55,6 +55,9 @@ export function reducer(state, action) {
     
     case ACTION.INIT:
       return {...initialState, targetWord: action.word, possibleWords: [...ALL_WORDS], isPlaying: true}
+
+    case ACTION.MESSAGE:
+      return {...state, message: action.message}
 
   
     default:

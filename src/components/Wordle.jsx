@@ -11,17 +11,40 @@ import {
   initialState,
   TOTAL_INFORMATION,
 } from "../CONSTANTS.js"
-import { useEffect, useReducer } from "react"
+import { useEffect, useReducer, useState } from "react"
+import { CalendarDays, LoaderCircle } from "lucide-react"
 import { reducer } from "../logic/reducer"
 
 function Wordle() {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const [loadingToday, setLoadingToday] = useState(false)
 
   function newRound(e) {
     if (e) e.currentTarget.blur() // To remove Retry button focus
 
     const randomWord = ALL_WORDS[Math.floor(Math.random() * ALL_WORDS.length)]
     dispatch({ type: ACTION.INIT, word: randomWord })
+  }
+
+  async function useTodaysWord(e) {
+    if (e) e.currentTarget.blur() // To remove Today button focus
+
+    if (loadingToday) return
+    setLoadingToday(true)
+
+    try {
+      const res = await fetch("/api/todays-word")
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+
+      const data = await res.json()
+      if (!data.solution) throw new Error("Missing solution in response")
+
+      dispatch({ type: ACTION.INIT, word: data.solution.toLowerCase() })
+    } catch {
+      dispatch({ type: ACTION.MESSAGE, message: "Couldn't fetch today's Wordle" })
+    } finally {
+      setLoadingToday(false)
+    }
   }
 
   useEffect(() => {
@@ -62,7 +85,18 @@ function Wordle() {
   return (
     <div className="wordle">
       <div className="leftContainer">
-        <TargetWord word={state.targetWord} />
+        <div className="targetWordRow">
+          <TargetWord word={state.targetWord} />
+          <button
+            className="button buttonSquare"
+            onClick={useTodaysWord}
+            title="Set today's Wordle answer as the target word"
+            aria-label="Set today's Wordle answer as the target word"
+            disabled={loadingToday}
+          >
+            {loadingToday ? <LoaderCircle size={24} className="spin" /> : <CalendarDays size={24} />}
+          </button>
+        </div>
         <Board rows={MAX_GUESSES} cols={WORD_LENGTH} state={state} />
         <div className="message">{state.message}</div>
         <button className="button" onClick={newRound} title="New round">

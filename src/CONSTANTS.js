@@ -9,7 +9,8 @@ export const ACTION = {
   LETTER: "LETTER",
   ENTER: "ENTER",
   BACKSPACE: "BACKSPACE",
-  INIT: "INIT"
+  INIT: "INIT",
+  MESSAGE: "MESSAGE"
 }
 
 export const initialState = {
