@@ -12,7 +12,6 @@ import {
 } from "../CONSTANTS.js"
 import { useEffect, useReducer } from "react"
 import { reducer } from "../logic/reducer"
-import "../styles/Wordle.css"
 
 function Wordle() {
   const [state, dispatch] = useReducer(reducer, initialState)

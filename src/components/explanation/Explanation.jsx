@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import "../../styles/Explanation.css"
 import Introduction from "./Introduction"
 import Experiment from "./Experiment"
 import Entropy from "./Entropy"

@@ -17,7 +17,7 @@ function AppShell({ children }) {
 
   return (
     <div className={appClass}>
-      <Header mode={mode} darkTheme={darkTheme} setDarkTheme={setDarkTheme} />
+      <Header mode={mode} setDarkTheme={setDarkTheme} />
       {children}
     </div>
   )
